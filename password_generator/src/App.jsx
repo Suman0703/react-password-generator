@@ -8,20 +8,14 @@ function App() {
   const [password, setpassword] = useState("")
   const [copied, setCopied] = useState(false)
 
-
-  //useRef hook 
   const passwordref = useRef(null)
 
   const passwordGen = useCallback(() => {
     let pass = ""
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
-    if (number) {
-      str += "0123456789"
-    }
-    if (char) {
-      str += "~!#$%^&*()_+{}?><:/.|"
-    }
+    if (number) str += "0123456789"
+    if (char) str += "~!#$%^&*()_+{}?><:/.|"
 
     for (let i = 0; i < length; i++) {
       const character = Math.floor(Math.random() * str.length)
@@ -32,55 +26,54 @@ function App() {
   }, [length, number, char])
 
   const copypass = useCallback(() => {
-    passwordref.current?.select();
-    window.navigator.clipboard.writeText(password);
+    passwordref.current?.select()
+    window.navigator.clipboard.writeText(password)
 
     setCopied(true)
-
-    setTimeout(() => {
-      setCopied(false)
-    }, 2000)
+    setTimeout(() => setCopied(false), 2000)
   }, [password])
-
 
   useEffect(() => {
     passwordGen()
   }, [passwordGen])
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-slate-900">
-      <div className="w-full max-w-md bg-slate-800 rounded-2xl p-6 shadow-2xl flex flex-col gap-6">
+    <div className="min-h-screen flex justify-center items-center bg-slate-900 px-4">
+      <div className="w-full max-w-md sm:max-w-lg bg-slate-800 rounded-2xl p-5 sm:p-6 shadow-2xl flex flex-col gap-6">
 
-        <h1 className="text-3xl font-bold text-center text-white tracking-wide">
+        <h1 className="text-2xl sm:text-3xl font-bold text-center text-white tracking-wide">
           🔐 Password Generator
         </h1>
 
+        {/* Password box */}
         <div className="bg-slate-700 p-4 rounded-xl flex flex-col gap-3">
-          <h2 className="text-sm uppercase tracking-wider text-slate-300 text-center">
+          <h2 className="text-xs sm:text-sm uppercase tracking-wider text-slate-300 text-center">
             Generated Password
           </h2>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <input
               type="text"
               value={password}
               readOnly
-              className="flex-1 px-4 py-2 rounded-full outline-none text-black font-medium bg-slate-100"
               ref={passwordref}
+              className="w-full px-4 py-2 rounded-full outline-none text-black font-medium bg-slate-100"
             />
 
             <button
-              className={`px-4 py-2 rounded-full text-white font-semibold transition ${copied ? "bg-green-600" : "bg-blue-500 hover:bg-blue-700"}`}
               onClick={copypass}
+              className={`w-full sm:w-auto px-4 py-2 rounded-full text-white font-semibold transition
+                ${copied ? "bg-green-600" : "bg-blue-500 hover:bg-blue-700"}`}
             >
               {copied ? "Copied" : "Copy"}
             </button>
-
           </div>
         </div>
 
-        <div className="flex gap-4 flex-row">
+        {/* Controls */}
+        <div className="flex flex-col sm:flex-row gap-6">
 
+          {/* Slider */}
           <div className="flex flex-col gap-2 flex-1">
             <div className="flex justify-between text-slate-300 text-sm">
               <span>Password Length</span>
@@ -101,7 +94,8 @@ function App() {
             </label>
           </div>
 
-          <div className="flex flex-col gap-3 justify-end text-slate-200">
+          {/* Checkboxes */}
+          <div className="flex flex-row sm:flex-col gap-4 sm:gap-3 justify-center sm:justify-end text-slate-200">
 
             <label className="flex items-center gap-2">
               <input
