@@ -51,7 +51,7 @@ function App() {
             Generated Password
           </h2>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
             <input
               type="text"
               value={password}
@@ -70,10 +70,9 @@ function App() {
           </div>
         </div>
 
-        {/* Controls */}
         <div className="flex flex-col sm:flex-row gap-6">
 
-          {/* Slider */}
+   
           <div className="flex flex-col gap-2 flex-1">
             <div className="flex justify-between text-slate-300 text-sm">
               <span>Password Length</span>
@@ -94,7 +93,6 @@ function App() {
             </label>
           </div>
 
-          {/* Checkboxes */}
           <div className="flex flex-row sm:flex-col gap-4 sm:gap-3 justify-center sm:justify-end text-slate-200">
 
             <label className="flex items-center gap-2">
